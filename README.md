@@ -1,21 +1,21 @@
 # ✈️ Angular Flight Tracker App
 
-Bu proje, **OpenSky Network API** kullanarak gerçek zamanlı uçuş verilerini listeleyen modern bir **Angular uygulamasıdır.**  
-Kullanıcılar uçuş koduna göre arama yapabilir, sonuçları tablo halinde görebilir ve detayları inceleyebilir.
+This project is a modern **Angular application that lists real-time flight data using the **OpenSky Network API**.**
+Users can search by flight code, view results in a table, and examine details.
 
 ---
 
-## 🚀 Özellikler
+## 🚀 Features
 
-- 🔍 **Uçuş arama:** `callsign` (uçuş kodu) ile filtreleme  
-- 🌍 **Gerçek zamanlı veri:** OpenSky API’den canlı konum, irtifa, hız bilgisi  
-- 💾 **Reaktif veri paylaşımı:** Angular **Signals** ile component’ler arası state yönetimi  
-- 🧭 **Google Maps bağlantısı:** Her uçağın konumuna harita linki  
-- ⚡ **Performans optimizasyonu:** `trackBy` ile hızlı render
+- 🔍 **Flight search:** Filter by `callsign` (flight code)
+- 🌍 **Real-time data:** Live location, altitude, and speed information from the OpenSky API
+- 💾 **Reactive data sharing:** Inter-component state management with Angular **Signals**
+- 🧭 **Google Maps connection:** Map link to each aircraft's location
+- ⚡ **Performance optimization:** Fast rendering with `trackBy`
 
 ---
 
-## 🧩 Genel Akış
+## 🧩 General Flow
 
 <img width="961" height="911" alt="Screenshot 2025-10-07 115406" src="https://github.com/user-attachments/assets/7bb6221c-d051-4097-9f21-bb5cd5c4f97f" />
 
