@@ -1,0 +1,87 @@
+<div class="panel">
+  <div class="panel__header">
+    <div class="title">
+      ✈️ Uçuş Sonuçları
+      <span class="chip" *ngIf="results()?.length">{{ results()?.length }}</span>
+    </div>
+    <div class="hint" *ngIf="!results()?.length">
+      Arama yaptıktan sonra sonuçlar burada görünecek
+    </div>
+  </div>
+
+  <div class="table-wrap" *ngIf="results()?.length; else empty">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Callsign</th>
+          <th>ICAO24</th>
+          <th>Ülke</th>
+          <th>Durum</th>
+          <th>Hız<br /><small>(kt)</small></th>
+          <th>İrtifa<br /><small>(ft)</small></th>
+          <th>Dikey<br /><small>(fpm)</small></th>
+          <th>Rota<br /><small>(°)</small></th>
+          <th>Squawk</th>
+          <th>Konum</th>
+          <th>Son Temas</th>
+          <th>Kaynak</th>
+          <th>Kat.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of results(); trackBy: trackByIcao">
+          <td>
+            <div class="callsign">
+              <span
+                class="dot"
+                [class.dot--air]="!f.on_ground"
+                [class.dot--ground]="f.on_ground"
+              ></span>
+              {{ f.callsign?.trim() || '—' }}
+            </div>
+          </td>
+          <td>
+            <code class="mono">{{ f.icao24 }}</code>
+          </td>
+          <td>{{ f.origin_country || '—' }}</td>
+          <td>
+            <span
+              class="badge"
+              [class.badge--air]="!f.on_ground"
+              [class.badge--ground]="f.on_ground"
+            >
+              {{ f.on_ground ? 'YERDE' : 'HAVADA' }}
+            </span>
+          </td>
+          <td class="num">{{ toKnots(f.velocity) }}</td>
+          <td class="num">{{ toFeet(f.geo_altitude ?? f.baro_altitude) }}</td>
+          <td class="num" [class.neg]="(f.vertical_rate ?? 0) < 0">{{ toFpm(f.vertical_rate) }}</td>
+          <td class="num">{{ fmtDeg(f.true_track) }}</td>
+          <td class="mono">{{ f.squawk || '—' }}</td>
+          <td>
+            <a
+              *ngIf="gmapsLink(f.latitude, f.longitude) as link"
+              [href]="link"
+              target="_blank"
+              rel="noreferrer"
+              class="link"
+            >
+              {{ f.latitude | number : '1.3-3' }}, {{ f.longitude | number : '1.3-3' }}
+            </a>
+            <span *ngIf="!gmapsLink(f.latitude, f.longitude)">—</span>
+          </td>
+          <td class="mono">{{ epochToTime(f.last_contact) }}</td>
+          <td>{{ positionSourceLabel(f.position_source) }}</td>
+          <td>{{ categoryLabel(f.category) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #empty>
+    <div class="empty">
+      <div class="empty__title">Henüz sonuç yok</div>
+      <div class="empty__desc">Üstteki arama kutusundan bir uçuş kodu aratın.</div>
+    </div>
+  </ng-template>
+</div>

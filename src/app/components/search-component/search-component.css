@@ -1,0 +1,143 @@
+:root {
+  --bg: #0b0d11;
+  --panel: #11151b;
+  --panel-2: #0e1217;
+  --text: #e6eaf2;
+  --muted: #9aa3b2;
+  --border: #1f2630;
+  --accent: #4da3ff;
+  --accent-2: #7cc4ff;
+  --green: #35c759;
+  --red: #ff4d4f;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f6f8fb;
+    --panel: #ffffff;
+    --panel-2: #f9fbfd;
+    --text: #1b2430;
+    --muted: #5f6b7a;
+    --border: #e6eaf0;
+    --accent: #2563eb;
+    --accent-2: #3b82f6;
+    --green: #17a34a;
+    --red: #ef4444;
+  }
+}
+
+/* FORM KABUĞU */
+form {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+/* GİRİŞ ALANI */
+input[name='searchItem'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 12px 14px 12px 40px; /* solda ikon boşluğu */
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%239aa3b2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-3.5-3.5'/></svg>")
+      no-repeat 12px center,
+    linear-gradient(var(--panel-2), var(--panel-2));
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+input[name='searchItem']::placeholder {
+  color: var(--muted);
+}
+
+/* Odak hali: belirgin ama yumuşak */
+input[name='searchItem']:focus {
+  outline: none;
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent),
+    0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* BUTONLAR – ortak */
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform 0.06s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* SUBMIT = ARA (PRIMARY) */
+button[type='submit'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--accent) 86%, transparent),
+    var(--accent)
+  );
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--border));
+  color: rgb(0, 0, 0);
+}
+button[type='submit']:hover {
+  filter: brightness(1.03);
+}
+button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* TEMİZLE (GHOST/SECONDARY) */
+button[type='button'] {
+  background: var(--panel-2);
+  color: var(--muted);
+}
+button[type='button']:hover {
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+}
+
+/* Küçük ekranlar: butonlar alta taşınsın */
+@media (max-width: 640px) {
+  form {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+  button {
+    width: 100%;
+  }
+}
+
+/* Erişilebilir odak halkası – klavye ile gezince */
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent),
+    0 6px 16px rgba(0, 0, 0, 0.18);
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+}

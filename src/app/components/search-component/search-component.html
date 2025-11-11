@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSearch()">
+  <input
+    name="searchItem"
+    [(ngModel)]="searchItem"
+    placeholder="Uçuş kodu (ör: TK1234)"
+  />
+  <button type="submit">Ara</button>
+  <button type="button" (click)="clear()">Temizle</button>
+</form>
